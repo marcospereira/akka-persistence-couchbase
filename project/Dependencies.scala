@@ -8,7 +8,7 @@ object Dependencies {
 
   val AkkaVersion = "2.5.19"
   val AlpakkaCouchbaseVersion = "1.0-M2"
-  val LagomVersion = "1.5.0-M3"
+  val LagomVersion = "1.5.0-RC1"
   object Compile {
     // used to easily convert rxjava into reactive streams and then into akka streams
     val rxJavaReactiveStreams = "io.reactivex" % "rxjava-reactive-streams" % "1.2.1" // Apache V2
