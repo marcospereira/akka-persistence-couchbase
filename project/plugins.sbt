@@ -1,4 +1,4 @@
-addSbtPlugin("de.heikoseeberger" % "sbt-header" % "5.0.0") // for maintenance of copyright file header
+addSbtPlugin("de.heikoseeberger" % "sbt-header" % "5.1.0") // for maintenance of copyright file header
 addSbtPlugin("com.geirsson" % "sbt-scalafmt" % "1.4.0") // sources autoformat
 
 // whitesource for tracking licenses and vulnerabilities in dependencies

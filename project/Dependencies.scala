@@ -6,7 +6,7 @@ import sbt._
 
 object Dependencies {
 
-  val AkkaVersion = "2.5.19"
+  val AkkaVersion = "2.5.21"
   val AlpakkaCouchbaseVersion = "1.0-M2"
   val LagomVersion = "1.5.0-RC1"
   object Compile {
@@ -33,7 +33,7 @@ object Dependencies {
     val akkaMultiNodeTestkit = "com.typesafe.akka" %% "akka-multi-node-testkit" % AkkaVersion % Test
 
     val logback = "ch.qos.logback" % "logback-classic" % "1.2.3" % Test // EPL 1.0 / LGPL 2.1
-    val scalaTest = "org.scalatest" %% "scalatest" % "3.0.4" % Test // ApacheV2
+    val scalaTest = "org.scalatest" %% "scalatest" % "3.0.5" % Test // ApacheV2
     val junit = "junit" % "junit" % "4.12" % Test
     val junitInterface = "com.novocode" % "junit-interface" % "0.11" % Test
 
@@ -41,7 +41,7 @@ object Dependencies {
     val lagomTestKitJavaDsl = "com.lightbend.lagom" %% "lagom-javadsl-testkit" % LagomVersion % Test
     val lagomPersistenceTestKit = "com.lightbend.lagom" %% "lagom-persistence-testkit" % LagomVersion % Test
 
-    val slf4jApi = "org.slf4j" % "slf4j-api" % "1.7.25" % Test
+    val slf4jApi = "org.slf4j" % "slf4j-api" % "1.7.26" % Test
   }
 
   import Compile._

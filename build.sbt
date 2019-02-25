@@ -15,7 +15,7 @@ def common: Seq[Setting[_]] = Seq(
                           "https://gitter.im/akka/dev",
                           url("https://github.com/akka/akka-persistence-couchbase/graphs/contributors")),
   licenses := Seq(("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))),
-  crossScalaVersions := Seq("2.12.7", "2.11.12"),
+  crossScalaVersions := Seq("2.12.8", "2.11.12"),
   scalaVersion := crossScalaVersions.value.last,
   crossVersion := CrossVersion.binary,
   scalafmtOnCompile := true,
