@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.lightbend.lagom.javadsl.persistence.PersistentEntity.ReplyType;
+
 public class TestEntity extends PersistentEntity<TestEntity.Cmd, TestEntity.Evt, TestEntity.State> {
 
     public interface Cmd extends Jsonable {
