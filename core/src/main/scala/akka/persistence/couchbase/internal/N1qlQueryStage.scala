@@ -109,7 +109,7 @@ private[akka] final class N1qlQueryStage[S](live: Boolean,
 
       override def preStart(): Unit = {
         if (live)
-          schedulePeriodicallyWithInitialDelay(Poll, settings.liveQueryInterval, settings.liveQueryInterval)
+          scheduleAtFixedRate(Poll, settings.liveQueryInterval, settings.liveQueryInterval)
         executeQuery(initialQuery)
       }
 

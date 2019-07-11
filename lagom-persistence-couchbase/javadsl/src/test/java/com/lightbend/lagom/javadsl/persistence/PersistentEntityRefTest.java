@@ -23,7 +23,6 @@ import org.junit.Test;
 import play.Application;
 import play.inject.Injector;
 import play.inject.guice.GuiceApplicationBuilder;
-import scala.concurrent.duration.FiniteDuration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,9 +30,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
+import java.time.Duration;
 
 import static com.lightbend.lagom.internal.persistence.testkit.AwaitPersistenceInit.awaitPersistenceInit;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertEquals;
 
@@ -125,7 +124,7 @@ public class PersistentEntityRefTest {
   @Test(expected = AskTimeoutException.class)
   public void testAskTimeout() throws Throwable {
     PersistentEntityRef<Cmd> ref = registry().refFor(TestEntity.class, "10").withAskTimeout(
-        FiniteDuration.create(1, MILLISECONDS));
+        Duration.ofMillis(1));
 
     List<CompletionStage<Evt>> replies = new ArrayList<>();
     for (int i = 0; i < 100; i++) {

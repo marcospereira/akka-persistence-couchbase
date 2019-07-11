@@ -87,9 +87,7 @@ private[lagom] object CouchbasePersistenceModule {
         ServiceLocatorHolder(system).setServiceLocator(new ServiceLocatorAdapter {
           override def locateAll(name: String): Future[List[URI]] = {
             import system.dispatcher
-
-            import scala.collection.JavaConverters._
-            import scala.compat.java8.FutureConverters._
+            import akka.util.ccompat.JavaConverters._
             locator.locateAll(name).toScala.map(_.asScala.toList)
           }
         })

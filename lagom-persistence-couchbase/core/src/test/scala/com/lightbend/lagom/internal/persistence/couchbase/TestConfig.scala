@@ -5,7 +5,7 @@
 package com.lightbend.lagom.internal.persistence.couchbase
 
 import com.typesafe.config.{Config, ConfigFactory}
-import scala.collection.JavaConverters._
+import akka.util.ccompat.JavaConverters._
 
 object TestConfig {
 

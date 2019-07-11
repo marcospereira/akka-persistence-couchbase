@@ -4,7 +4,7 @@
 
 package com.lightbend.lagom.javadsl.persistence
 
-import scala.collection.JavaConverters._
+import akka.util.ccompat.JavaConverters._
 import scala.concurrent.duration._
 import java.util.Optional
 

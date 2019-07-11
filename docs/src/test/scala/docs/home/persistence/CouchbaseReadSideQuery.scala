@@ -12,7 +12,7 @@ import com.lightbend.lagom.scaladsl.persistence.couchbase.CouchbaseReadSide
 import docs.home.persistence.CouchbaseReadSideProcessorTwo.HelloEventProcessor
 import play.api.libs.json.{Format, Json}
 
-import scala.collection.JavaConverters._
+import akka.util.ccompat.JavaConverters._
 import scala.concurrent.ExecutionContext
 // #imports
 

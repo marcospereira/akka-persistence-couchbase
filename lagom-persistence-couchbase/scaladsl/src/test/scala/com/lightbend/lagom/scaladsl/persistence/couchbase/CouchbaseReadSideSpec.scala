@@ -16,7 +16,6 @@ import com.lightbend.lagom.scaladsl.persistence._
 import com.typesafe.config.{Config, ConfigFactory}
 
 import scala.concurrent.Future
-import scala.concurrent.duration._
 
 object CouchbaseReadSideSpec {
 
@@ -40,9 +39,7 @@ class CouchbaseReadSideSpec
 
   override def getAppendCount(id: String): Future[Long] = readSide.getAppendCount(id)
 
-  override def afterAll(): Unit = {
-    persistentEntityRegistry.gracefulShutdown(5.seconds)
+  override def afterAll(): Unit =
     super.afterAll()
-  }
 
 }

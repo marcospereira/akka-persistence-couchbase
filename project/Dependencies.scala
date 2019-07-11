@@ -7,10 +7,10 @@ import sbt._
 object Dependencies {
   val Scala211 = "2.11.12"
   val Scala212 = "2.12.8"
-  val Scala213 = "2.13.0-M5"
+  val Scala213 = "2.13.0"
 
-  val AlpakkaCouchbaseVersion = "1.0.1"
   val AkkaVersion = "2.6.0-M4"
+  val AlpakkaCouchbaseVersion = "1.1.0"
   val LagomVersion = "1.6.0-M4"
   object Compile {
     // used to easily convert rxjava into reactive streams and then into akka streams
@@ -37,7 +37,7 @@ object Dependencies {
     val akkaMultiNodeTestkit = "com.typesafe.akka" %% "akka-multi-node-testkit" % AkkaVersion % Test
 
     val logback = "ch.qos.logback" % "logback-classic" % "1.2.3" % Test // EPL 1.0 / LGPL 2.1
-    val scalaTest = "org.scalatest" %% "scalatest" % "3.0.5" % Test // ApacheV2
+    val scalaTest = "org.scalatest" %% "scalatest" % "3.0.8" % Test // ApacheV2
     val junit = "junit" % "junit" % "4.12" % Test
     val junitInterface = "com.novocode" % "junit-interface" % "0.11" % Test
 

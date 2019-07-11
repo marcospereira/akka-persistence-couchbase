@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.common.collect.ImmutableList;
 import com.lightbend.lagom.javadsl.persistence.testkit.SimulatedNullpointerException;
 import com.lightbend.lagom.serialization.Jsonable;
-import com.lightbend.lagom.javadsl.persistence.PersistentEntity.ReplyType;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import java.util.Optional;
 
 public class TestEntity extends PersistentEntity<TestEntity.Cmd, TestEntity.Evt, TestEntity.State> {
 
-    public static interface Cmd extends Jsonable {
+    public interface Cmd extends Jsonable {
     }
 
     public static class Get implements Cmd, ReplyType<State> {
@@ -533,30 +532,23 @@ public class TestEntity extends PersistentEntity<TestEntity.Cmd, TestEntity.Evt,
     @Override
     public Behavior initialBehavior(Optional<State> snapshotState) {
 
-        if (snapshotState.isPresent())
-            probe.ifPresent(p -> p.tell(new Snapshot(snapshotState.get()), ActorRef.noSender()));
+        snapshotState.ifPresent(state ->
+            probe.ifPresent(p -> p.tell(new Snapshot(state), ActorRef.noSender()))
+        );
 
         BehaviorBuilder b = newBehaviorBuilder(State.EMPTY);
 
-        if (snapshotState.isPresent()) {
-            b.setState(snapshotState.get());
-        }
+        snapshotState.ifPresent(b::setState);
 
         b.setEventHandler(Appended.class, evt -> state().add(evt.getElement()));
         b.setEventHandler(Prepended.class, evt -> state().add(evt.getElement()));
+        b.setEventHandler(Cleared.class, evt -> null);
 
         b.setEventHandlerChangingBehavior(InAppendMode.class, evt -> becomeAppending(behavior()));
         b.setEventHandlerChangingBehavior(InPrependMode.class, evt -> becomePrepending(behavior()));
 
-        b.setEventHandler(Cleared.class, evt -> null);
-
-        b.setReadOnlyCommandHandler(Get.class, (cmd, ctx) -> {
-            ctx.reply(state());
-        });
-
-        b.setReadOnlyCommandHandler(GetAddress.class, (cmd, ctx) -> {
-            ctx.reply(Cluster.get(system).selfAddress());
-        });
+        b.setReadOnlyCommandHandler(Get.class, (cmd, ctx) -> ctx.reply(state()));
+        b.setReadOnlyCommandHandler(GetAddress.class, (cmd, ctx) -> ctx.reply(Cluster.get(system).selfAddress()));
 
         b.setCommandHandler(ChangeMode.class,
             (cmd, ctx) -> {

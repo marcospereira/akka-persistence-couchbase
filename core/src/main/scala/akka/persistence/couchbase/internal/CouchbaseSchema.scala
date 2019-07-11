@@ -14,11 +14,11 @@ import akka.persistence.{PersistentRepr, SnapshotMetadata}
 import akka.serialization.{AsyncSerializer, Serialization, Serializers}
 import akka.stream.alpakka.couchbase.scaladsl.CouchbaseSession
 import akka.util.OptionVal
+import akka.util.ccompat.JavaConverters._
 import com.couchbase.client.java.document.JsonDocument
 import com.couchbase.client.java.document.json.{JsonArray, JsonObject}
 import com.couchbase.client.java.query.{N1qlParams, N1qlQuery}
 
-import scala.collection.JavaConverters._
 import scala.collection.{immutable => im}
 import scala.concurrent.duration.FiniteDuration
 import scala.concurrent.{ExecutionContext, Future}

@@ -6,7 +6,7 @@ package com.lightbend.lagom.scaladsl.persistence.multinode
 
 import akka.actor.setup.ActorSystemSetup
 import akka.actor.{ ActorRef, ActorSystem, Address, BootstrapSetup }
-import akka.cluster.{ Cluster, MemberStatus }
+import akka.cluster.{Cluster, MemberStatus}
 import akka.pattern.pipe
 import akka.remote.testconductor.RoleName
 import akka.remote.testkit.{ MultiNodeConfig, MultiNodeSpec }
@@ -127,7 +127,7 @@ abstract class AbstractClusteredPersistentEntitySpec(config: AbstractClusteredPe
     roles.foreach(n => join(n, node1))
     within(15.seconds) {
       awaitAssert(Cluster(system).state.members.size should be(3))
-      awaitAssert(Cluster(system).state.members.map(_.status) should be(Set(MemberStatus.Up)))
+      awaitAssert(Cluster(system).state.members.toSeq.map(_.status) should be(Seq(MemberStatus.Up)))
     }
 
     enterBarrier("startup")

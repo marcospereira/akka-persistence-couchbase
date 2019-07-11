@@ -34,7 +34,6 @@ def common: Seq[Setting[_]] = Seq(
     "-Xlint",
     "-Ywarn-dead-code",
     "-Ywarn-numeric-widen",
-    "-Xfuture",
     "-Xfatal-warnings"
   ),
   bintrayOrganization := Some("akka"),
@@ -128,7 +127,6 @@ lazy val `copy-of-lagom-persistence-test` =
       // This modules copy-pasted preserve it as is
       scalafmtOnCompile := false,
       libraryDependencies := Dependencies.`copy-of-lagom-persistence-test`,
-      crossScalaVersions -= Dependencies.Scala213,
     )
 
 lazy val `lagom-persistence-couchbase-core` = (project in file("lagom-persistence-couchbase/core"))
@@ -139,7 +137,6 @@ lazy val `lagom-persistence-couchbase-core` = (project in file("lagom-persistenc
   .settings(
     name := "lagom-persistence-couchbase-core",
     libraryDependencies := Dependencies.`lagom-persistence-couchbase-core`,
-    crossScalaVersions -= Dependencies.Scala213,
   )
 
 lazy val `lagom-persistence-couchbase-javadsl` = (project in file("lagom-persistence-couchbase/javadsl"))
@@ -154,7 +151,6 @@ lazy val `lagom-persistence-couchbase-javadsl` = (project in file("lagom-persist
   .settings(
     name := "lagom-javadsl-persistence-couchbase",
     libraryDependencies := Dependencies.`lagom-persistence-couchbase-javadsl`,
-    crossScalaVersions -= Dependencies.Scala213,
   )
   .enablePlugins(MultiJvmPlugin)
   .configs(MultiJvm)
@@ -172,7 +168,6 @@ lazy val `lagom-persistence-couchbase-scaladsl` = (project in file("lagom-persis
   .settings(
     name := "lagom-scaladsl-persistence-couchbase",
     libraryDependencies := Dependencies.`lagom-persistence-couchbase-scaladsl`,
-    crossScalaVersions -= Dependencies.Scala213,
   )
   .enablePlugins(MultiJvmPlugin)
   .configs(MultiJvm)

@@ -7,10 +7,11 @@ package com.lightbend.lagom.javadsl.persistence.multinode
 import java.util.concurrent.CompletionStage
 
 import akka.actor.{ ActorRef, ActorSystem, Address }
-import akka.cluster.{ Cluster, MemberStatus }
+import akka.cluster.{Cluster, MemberStatus}
 import akka.remote.testconductor.RoleName
 import akka.remote.testkit.{ MultiNodeConfig, MultiNodeSpec }
 import akka.testkit.ImplicitSender
+import akka.util.ccompat.JavaConverters._
 import com.lightbend.lagom.javadsl.persistence._
 import com.lightbend.lagom.javadsl.persistence.testkit.pipe
 import com.typesafe.config.{ Config, ConfigFactory }
@@ -18,7 +19,6 @@ import play.api.inject.bind
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.{ Application, Configuration, Environment }
 
-import scala.collection.JavaConverters._
 import scala.compat.java8.FutureConverters._
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -106,7 +106,7 @@ abstract class AbstractClusteredPersistentEntitySpec(config: AbstractClusteredPe
     roles.foreach(n => join(n, node1))
     within(15.seconds) {
       awaitAssert(Cluster(system).state.members.size should be(3))
-      awaitAssert(Cluster(system).state.members.map(_.status) should be(Set(MemberStatus.Up)))
+      awaitAssert(Cluster(system).state.members.toSeq.map(_.status) should be(Seq(MemberStatus.Up)))
     }
 
     enterBarrier("startup")

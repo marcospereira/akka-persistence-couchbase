@@ -27,6 +27,7 @@ import akka.stream.ActorMaterializer
 import akka.stream.alpakka.couchbase.CouchbaseSessionRegistry
 import akka.stream.alpakka.couchbase.scaladsl.CouchbaseSession
 import akka.stream.scaladsl.{Sink, Source}
+import akka.util.ccompat.JavaConverters._
 import com.couchbase.client.java.document.json.JsonObject
 import com.couchbase.client.java.query._
 import com.typesafe.config.Config
@@ -344,7 +345,6 @@ final class CouchbaseReadJournal(eas: ExtendedActorSystem, config: Config, confi
         .map {
           case (ordering, doc) =>
             val persistenceId = doc.content().getString(CouchbaseSchema.Fields.PersistenceId)
-            import scala.collection.JavaConverters._
             val messages = doc.content().getArray("messages").iterator().asScala
             val specificDoc = messages.find {
               case jo: JsonObject => jo.getString(CouchbaseSchema.Fields.Ordering) == ordering
